@@ -6,7 +6,7 @@ from langchain_core.documents import Document
 import openpyxl
 from langchain_openai import ChatOpenAI
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.tools import tool
 from langchain.agents import create_agent
@@ -57,7 +57,10 @@ def create_my_agent(document_path):
     )
 
     status.update(label="正在加载向量模型...")
-    embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-base-zh-v1.5")
+    embeddings = OpenAIEmbeddings(
+        api_key=st.secrets["DEEPSEEK_API_KEY"],
+        base_url="https://api.deepseek.com",
+    )
 
     status.update(label="正在读取本地文档并建立向量库...")
     if document_path.endswith(".pdf"):
