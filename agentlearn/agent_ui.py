@@ -1,7 +1,7 @@
 # 国内网络：用 HuggingFace 镜像
 import os
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
+# 不需要 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION 了，FAISS 不依赖 protobuf
 
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
@@ -10,7 +10,7 @@ import openpyxl
 from langchain_openai import ChatOpenAI
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_core.tools import tool
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver
@@ -81,7 +81,7 @@ def create_my_agent(document_path):
                 metadata={"source": document_path, "sheet": sheet_name}
             ))
     chunks = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100).split_documents(documents)
-    vectorstore = Chroma.from_documents(chunks, embeddings, collection_name="agent_ui_collection")
+    vectorstore = FAISS.from_documents(chunks, embeddings)
     retriever = vectorstore.as_retriever(search_kwargs={"k": 6})
 
     @tool
