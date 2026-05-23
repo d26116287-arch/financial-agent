@@ -1,0 +1,17 @@
+__pycache__/
+.venv/
+.claude/
+chroma_db/
+*.pyc
+.DS_Store
+agentlearn/.streamlit/secrets.toml
+agentlearn/create_excel.py
+agentlearn/company_report.txt
+agentlearn/example.txt
+agentlearn/mmexport*.jpg
+agentlearn/test_invoice.png
+agentlearn/from openai import OpenAI.py
+agentlearn/import json.py
+agentlearn/with_open_pdf
+agentlearn/科大讯飞25年半年报.pdf
+agentlearn/财务数据.xlsx
