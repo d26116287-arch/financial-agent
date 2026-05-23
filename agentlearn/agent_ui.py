@@ -1,7 +1,4 @@
-# 国内网络：用 HuggingFace 镜像
 import os
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-# 不需要 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION 了，FAISS 不依赖 protobuf
 
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
