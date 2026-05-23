@@ -1,6 +1,7 @@
 # 国内网络：用 HuggingFace 镜像
 import os
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
